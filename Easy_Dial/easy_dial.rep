@@ -1,0 +1,115 @@
+int _freqP;
+bool _sin_telefons;
+bool _pre_indefinit;
+
+//struct copia del vector dump que no se modifica en el easy_dial (solo en la constructora)
+struct s_node{
+	phone s_p; 
+};
+
+//struct arbol tst ordenado del vector dump / struct s_node
+struct node_tst{
+	char _c;
+	bool _interes; //booleano que determina si se acaba o no la palabra buscada
+	node_tst* _esq;
+	node_tst* _cen;
+	node_tst* _dret;
+	s_node* _apuntar; //nodo que apunta al phone con la maxima frequencia
+};
+
+s_node* max_freq;
+
+node_tst* _arrel; //nodo tst raiz
+string _guard; //string donde se guarda el conjunto de actuales
+
+
+//----------------------------------------------------------------------------------------------------------------
+
+//Pre: Cert.
+//Post: Fusiona dues parts ordenades del vector V en una sola part ordenada.
+static void merge(vector<phone>& V, int esq, int mig, int dret) throw(error);
+
+//Pre: Cert.
+//Post: Ordena el vector V mitjançant l'algorisme de merge sort.
+static void merge_sort(vector<phone>& V, int esq, int dret);
+
+
+//Pre: Cert.
+//Post: Retorna l'arrel actualitzada del subarbre TST després d'inserir el telèfon p.
+node_tst* insereix(node_tst* n,s_node* snode, unsigned int i, const string& s, const phone& p,bool& activar);
+
+//Pre: Cert.
+//Post: Totes les instàncies del subarbre TST a partir de n són alliberades de memòria.
+static void destruir_trie( node_tst* n);
+
+//Pre: Cert.
+//Post: Retorna una còpia del subarbre TST a partir de n.
+node_tst* copiar_trie(const node_tst* n);
+
+// Pre: Cert.
+// Post: La funció crea una còpia del subarbre TST a partir del node apuntat per 'copia' i l'assigna al punter 'nou'.
+void copiar_snode(node_tst*& nou, const node_tst* copia);
+
+//Pre: Cert.
+//Post:Retorna el node del subarbre TST corresponent al prefix s a partir del node n i el caràcter c.
+node_tst* buscar_node_prefix(node_tst* n, unsigned int i, const string& s, char c);
+
+//Pre: Cert.
+//Post: Retorna el node del subarbre TST corresponent al prefix s a partir del node n.
+static node_tst* buscar_node_comencem(node_tst* n, unsigned int i, const string& s);
+
+//Pre: Cert.
+//Post: Retorna el número de telèfon associat al prefix s i el caràcter c a partir del node n.
+static nat obtenir_num_telefon(node_tst* n, unsigned int i, const string& s, char c) throw(error);
+
+//Pre: Cert.
+//Post: result conté tots els noms de telèfon que comencen amb el prefix pref_actual en ordre lexicogràfic creixent.
+static void recopilar_nombres(node_tst* n, const string& pref_actual, vector<string>& result);
+
+//Pre: Cert.
+//Post: Retorna el nombre de nodes del subarbre TST a partir de n.
+static nat calcul_longitud(node_tst*n);
+
+//Pre: Cert.
+//Post: freq_res conté la longitud mitjana dels telèfons que comencen amb el prefix del subarbre TST a partir de n.
+static void calcul_longitud_rec(node_tst*n, nat f,nat freq_total, double& freq_res);
+
+/* DOCUMENTACIÓ
+
+Primer volem fer un comentari sobre els costs O(27). Aquest cost es el pitjor cas que un tst pot optar, això vol dir que s'han utilitzat tots 
+els caracters disponibles del alfabet més el '\0'.
+
+Hem fet ús d'una implementació d'un TST (Ternary Search Trie) en el desenvolupament de l'Easy Dial, ja que aquest tipus d'estructura 
+resulta ser més eficient en comparació amb altres alternatives. El TST és especialment adequat per gestionar col·leccions de dades ordenades 
+com ara el registre de trucades, proporcionant avantatges significatives en termes de eficiència i temps d'execució. Alhora com he fet vist a classe, 
+també sabem que es fàcil tractar un TST de cara als caràcters.
+
+En el nostre disseny hem introduït una estructura anomenada, s_node, que ens permet gestionar els phones del vector proporcionat. Hem realitzat Aquesta
+estuctura degut a que posar un phone en cada node del TST es molt ineficient (gasta molt espai degut a que hi han molts més nodes que phones).
+A més, cadascun dels nodes del TST, representat per la estructura node_tst, conté informació relativa als caràcters que conformen els noms, 
+així com un punter al snode que tracta el telèfon amb la màxima freqüència del caracter del node més l'acumulació dels caracters 
+dels nodes anteriors(_apuntar).
+
+En la nostra inserció del arbre TST, tenim un bucle on anem inserint a l'arbre TST phone per phone afegint al final del nom del phone un node amb '\0' 
+com a char per facilitar l'estructura de la clase. Ordenem el vector donat amb un merge sort per tal de obtenir un vector de phones ordenats de máxma 
+freqüència a mínima (En cas d'haver dos phones amb la mateixa freqüència va primer el que sigui alfalexicament més gran). El phone de la màxima freqüència 
+en guardem en un punter adicional(max_freq) i només en el seu '\0', cada phone es referencia en el seu '\0', i en un caràcter del nom 
+(per exemple: si MAR, es el phone de màxima freqüència, es guarda en el max_freq i en el '\0'. Si MARIA, es el següent phone amb màxima freqüència, 
+es guarda en la M i en el '\0'. Si tenim un phone amb el nom M, on tots els carácters estan ocupats amb el phone amb més freqüència). Fem ús d'un 
+booleà (activar) per només referenciar en el node on no hi ha cap referencia (això significa que el phone actual es el més freqüent) i no referenciar-lo 
+en els següents nodes. Utilitzem un altre booleà dins del struct TST (_interes) per no repetir phones al calcular la longitud_mitjana() i també per 
+quan fem seguent() si existeix un phone només es referencia en el seu '\0' que es mostri.
+
+La variable _freqP és utilitzada per mantenir un seguiment de la suma de les freqüències de tots els telèfons presents al registre. Per a la gestió 
+eficient de situacions especials, les variables _sin_telefons i _pre_indefinit indiquen si no hi ha telèfons al node i si el prefix està indefinit, 
+respectivament.
+
+En aquesta implementació, el node arrel (_arrel) del TST s'utilitza com a punt de partida per a les diverses operacions que ofereix l'Easy Dial, 
+com ara l'obtenció de noms i números de telèfon basats en prefixos proporcionats. 
+Usem un string (_guard) emmagatzema el conjunt de chars utilitzats durant la cerca (per exemple: al fer inici, _guard = "", al fer 
+següent M, _guard = "M", al fer següent A, _guard = "MA" al fer anterior, _guard = "M").
+
+Aquesta elecció de la estructura TST proporciona una base sòlida per a l'implementació de les funcionalitats requerides per l'Easy Dial, 
+oferint eficiència i rendiment optimitzats en les diverses operacions sobre el conjunt de dades de trucades.
+
+*/

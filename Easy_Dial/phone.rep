@@ -1,0 +1,10 @@
+int _freq;
+int _tel;
+string _name;
+
+/* DOCUMENTACIÓ 
+
+Només hem utilitzat 3 variables necessàries per l'ús de la classe phone, un int pel número de telèfon,
+un int per la freqüència de trucades i un string pel nom de la persona associada.
+
+*/

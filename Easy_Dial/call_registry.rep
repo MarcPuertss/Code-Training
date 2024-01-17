@@ -1,0 +1,86 @@
+struct node{
+ 	phone _p;
+  node *_esq;
+  node *_dret;
+  int _altura;
+};
+node *_arrel;
+
+int _mida;
+
+//-------------------------------------------------------------------------------------------------------------
+
+//Pre: Cert.
+//Post: Allibera la memòria ocupada per tots els nodes de l'arbre.
+void destruir_BST(node* n);
+
+//Pre: Cert.
+//Post: Retorna l'altura del node n.
+static int get_altura(node* n);
+
+//Pre: Cert.
+//Post: Retorna el balanç del node n.
+static int get_balance(node* n);
+
+//Pre: Cert.
+//Post: Insereix un nou node amb la informació de p a l'arbre i el retorna.
+node* insereix(node* n, const phone& p);
+
+//Pre: Cert.
+//Post: Retorna una còpia profunda de l'arbre amb arrel en el node n.
+static node* copiar_BST(node* n);
+
+//Pre: Cert.
+//Post: Realitza una rotació cap a l'esquerra al voltant del node x i retorna el nou node arrel.
+static node* rotar_esq(node* x);
+
+//Pre: Cert.
+//Post: Realitza una rotació cap a la dreta al voltant del node y i retorna el nou node arrel.
+static node* rotar_dret(node* y);
+
+//Pre: Cert.
+//Post: Elimina el node amb número num de l'arbre i retorna el nou node arrel.
+node* elimina_recursiva(node* n, nat num)throw(error);
+
+//Pre: Cert.
+//Post: Retorna el node amb el phone amb el telefón més petit a l'arbre amb arrel en el node n.
+static node* trobar_fill(node* n);
+
+//Pre: Cert.
+//Post: Elimina el node amb el phone amb el telefón més petit a l'arbre amb arrel en el node n i retorna el nou node arrel.
+node* elimina_minim(node* &n);
+
+//Pre: Cert.
+//Post: Retorna el node amb número num a l'arbre amb arrel en el node n.
+static node* buscar(node* n, nat num);
+
+//Pre: Cert.
+//Post: Omple el vector V amb les entrades del registre.
+static void dump_recursiu(node* n, vector<phone>& V);
+
+//Pre: Cert.
+//Post: Fusiona dues parts ordenades del vector V en una sola part ordenada.
+static void merge(vector<phone>& V, int esq, int mig, int dret) throw(error);
+
+//Pre: Cert.
+//Post:Ordena el vector V mitjançant l'algorisme de merge sort.
+static void merge_sort(vector<phone>& V, int esq, int dret);
+
+
+/* DOCUMENTACIÓ
+
+Hem fet ús d'un arbre AVL, per diverses raons. En primer lloc, els arbres AVL ofereixen un ordenament automàtic, 
+la qual cosa és beneficiosa per realitzar cerques i recuperar dades en un ordre específic, com ara alfabèticament per nom. 
+A més, les operacions de cerca, inserció i eliminació en arbres AVL tenen un rendiment logarítmic en el nombre d'elements, 
+proporcionant eficiència en aquestes operacions. L'estructura previsible dels arbres AVL també facilita la gestió de la memòria. 
+Si és necessari mantenir estadístiques de trucades per número i ordenar els números segons la freqüència de trucades, un arbre AVL 
+pot ser una opció eficient. 
+
+Ús de variables:
+
+Tractant l'us de variables utilitzem un struct node que defineix l'estructura d'un node a l'arbre AVL, que emmagatzema 
+la informació d'un phone en cada node. Conté punters als nodes fills esquerre i dret, així com un enter per a l'altura del subarbre. 
+A més utilitzem el node _arrel, que apunta al node arrel de l'arbre AVL. Alhora fem ús de la variable _mida que tracta un integer que 
+representa la quantitat total de nodes a l'arbre AVL, que s'actualitza dinàmicament en realitzar creacions i eliminacins de nodes. 
+
+*/
