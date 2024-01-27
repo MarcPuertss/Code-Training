@@ -18,4 +18,3 @@ El repositorio incluye soluciones para problemas en las siguientes categorías:
 
 	#Vectores, Listas, Pilas y Colas: Problemas que implican el uso de estructuras de datos lineales para organizar y manipular datos.
 
-¡Espero que este repositorio sea una herramienta útil para mejorar tus habilidades de programación y enfrentar con éxito los desafíos de Jutge!
