@@ -4,7 +4,7 @@
 	El sistema EasyDial es un conjunto de clases diseñado para gestionar información relacionada con llamadas telefónicas. El proyecto consta de tres módulos principales:
 
 
-g
+
 ##Módulo de Registro de Llamadas (call_registry):
 	Almacena y gestiona información sobre números de teléfono, nombres asociados y frecuencia de llamadas a cada uno.
 	Permite consultas eficientes sobre la información almacenada.
