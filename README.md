@@ -4,7 +4,7 @@
 
 El repositorio contiene dos grandes módulos: 
 
-1. [EasyDial - Sistema de Gestión de Llamadas Telefónicas]((https://github.com/MarcPuertss/Code-Training/tree/main/Easy_Dial))
+1. [EasyDial - Sistema de Gestión de Llamadas Telefónicas](https://github.com/MarcPuertss/Code-Training/tree/main/Easy_Dial)
 2. [Soluciones de Problemas de Jutge](
 https://github.com/MarcPuertss/Code-Training/tree/main/Jutge)
 
