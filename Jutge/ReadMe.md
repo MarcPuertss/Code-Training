@@ -2,7 +2,7 @@
 
 Este repositorio contiene soluciones a problemas de Jutge, abordando más de 150 ejercicios que cubren diversos conceptos de programación y estructuras de datos. Estas soluciones están diseñadas para ayudar a los estudiantes a comprender y practicar la resolución de problemas en programación.
 
-## Contenido
+# Contenido
 
 El repositorio incluye soluciones para problemas en las siguientes categorías:
 
