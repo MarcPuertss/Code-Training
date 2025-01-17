@@ -59,6 +59,5 @@ El módulo principal (`driver_EasyDial`) utiliza estas clases para integrar toda
 
 ### Compilación
 El proyecto incluye un archivo **Makefile** para simplificar la compilación.  
-Para compilar el programa, ejecuta el siguiente comando en la terminal:  
-make
+Para compilar el programa, ejecuta el siguiente comando en la terminal:  **`make`**
 Esto generará un archivo ejecutable llamado program.exe.
