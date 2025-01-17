@@ -5,24 +5,24 @@ Este repositorio contiene soluciones a problemas de Jutge, abordando más de 150
 ## Contenido
 
 El repositorio incluye soluciones para problemas en las siguientes categorías:
-	
-	### Básicos
+
+## Básicos
 	Problemas que involucran la aplicación de condicionales y bucles para resolver situaciones específicas, además de funciones, esquemas iterativos y problemas de búsqueda y recorrido.
-	
-	### Tablas de Hash
+
+## Tablas de Hash
 	Ejercicios que exploran el uso de tablas de hash para organizar y recuperar datos eficientemente.
-	
-	### Punteros
+
+## Punteros
 	Problemas que requieren el manejo adecuado de punteros para acceder y manipular datos en memoria.
-	
-	### Recursividad
+
+## Recursividad
 	Soluciones que emplean la técnica de la recursividad para resolver problemas de manera elegante y eficiente.
-	
-	### Structs
+
+## Structs
 	Ejercicios que utilizan estructuras para representar y organizar datos de manera más compleja.
-	
-	### Árboles
+
+## Árboles
 	Incluyendo árboles binarios, árboles generales, árboles de búsqueda binaria (BST), árboles AVL y árboles digitales.
-	
-	### Vectores, Listas, Pilas y Colas
+
+## Vectores, Listas, Pilas y Colas
 	Problemas que implican el uso de estructuras de datos lineales para organizar y manipular datos.
